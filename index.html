@@ -3,8 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Vision International Production — pioneering epigenetics, bioelectromagnetics and electroceuticals to protect people from a broken medical system.">
+<meta name="theme-color" content="#020818">
 <title>Vision International Production</title>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;600;700&family=Orbitron:wght@400;700&display=swap"></noscript>
 <style>
   :root {
     --navy: #020818;
@@ -27,19 +32,20 @@
   body {
     background: var(--navy);
     color: var(--text-primary);
-    font-family: 'Space Grotesk', sans-serif;
+    font-family: 'Space Grotesk', system-ui, sans-serif;
     overflow-x: hidden;
   }
 
-  /* ── NOISE OVERLAY ── */
+  /* ── NOISE OVERLAY — use contain to avoid repaints ── */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 9999;
     opacity: 0.4;
+    will-change: auto;
   }
 
   /* ── NAV ── */
@@ -51,9 +57,11 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(2,8,24,0.7);
-    backdrop-filter: blur(20px);
+    background: rgba(2,8,24,0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid rgba(0,212,255,0.1);
+    contain: layout style;
   }
 
   .logo {
@@ -106,7 +114,7 @@
     font-size: 12px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    transition: color 0.3s;
+    transition: color 0.2s;
   }
 
   nav ul li a:hover { color: var(--accent-cyan); }
@@ -120,7 +128,7 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     text-decoration: none;
-    transition: all 0.3s;
+    transition: background 0.2s, color 0.2s;
   }
 
   .nav-cta:hover {
@@ -166,6 +174,7 @@
     background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
     animation: scan 4s ease-in-out infinite;
     opacity: 0.4;
+    will-change: top;
   }
 
   @keyframes scan {
@@ -181,12 +190,14 @@
     transform: translateY(-50%);
     width: 520px;
     height: 520px;
+    will-change: transform;
   }
 
   .cell-svg {
     width: 100%;
     height: 100%;
     animation: cellRotate 20s linear infinite;
+    will-change: transform;
   }
 
   @keyframes cellRotate {
@@ -197,6 +208,7 @@
   .cell-inner {
     animation: cellRotate 15s linear infinite reverse;
     transform-origin: 260px 260px;
+    will-change: transform;
   }
 
   .hero-content {
@@ -270,7 +282,7 @@
     text-transform: uppercase;
     border: none;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: background 0.2s, transform 0.2s;
     clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
   }
 
@@ -290,7 +302,7 @@
     text-transform: uppercase;
     cursor: pointer;
     background: transparent;
-    transition: all 0.3s;
+    transition: background 0.2s, border-color 0.2s;
   }
 
   .btn-ghost:hover {
@@ -347,6 +359,8 @@
     padding: 160px 60px;
     background: var(--deep-blue);
     overflow: hidden;
+    content-visibility: auto;
+    contain-intrinsic-size: 0 800px;
   }
 
   #manifesto::before {
@@ -427,7 +441,7 @@
     border-left: 3px solid var(--accent-cyan);
     position: relative;
     overflow: hidden;
-    transition: border-color 0.3s, background 0.3s;
+    transition: border-color 0.2s, background 0.2s;
   }
 
   .pillar-card:hover {
@@ -470,6 +484,8 @@
     position: relative;
     height: 400vh;
     background: var(--navy);
+    content-visibility: auto;
+    contain-intrinsic-size: 0 2000px;
   }
 
   .machine-sticky {
@@ -598,6 +614,7 @@
     border-radius: 50%;
     border: 1px solid rgba(0,212,255,0.15);
     animation: orbitSpin 8s linear infinite;
+    will-change: transform;
   }
 
   .orbit-ring:nth-child(2) {
@@ -638,6 +655,8 @@
     justify-content: center;
     overflow: hidden;
     background: #000;
+    content-visibility: auto;
+    contain-intrinsic-size: 0 100vh;
   }
 
   .video-overlay {
@@ -705,7 +724,7 @@
     align-items: center;
     gap: 16px;
     cursor: pointer;
-    transition: all 0.3s;
+    transition: opacity 0.2s, transform 0.2s;
   }
 
   .play-circle {
@@ -715,7 +734,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.3s;
+    transition: opacity 0.2s, transform 0.2s;
     position: relative;
   }
 
@@ -825,7 +844,7 @@
     padding: 40px 32px;
     text-align: center;
     overflow: hidden;
-    transition: all 0.4s;
+    transition: border-color 0.2s, background 0.2s;
   }
 
   .cymatic-card:hover {
@@ -941,6 +960,47 @@
     background: var(--navy);
     position: relative;
     overflow: hidden;
+    content-visibility: auto;
+    contain-intrinsic-size: 0 800px;
+  }
+
+  /* ── ELECTROCEUTICALS ── */
+  #electroceuticals {
+    padding: 160px 60px;
+    background: linear-gradient(180deg, var(--deep-blue) 0%, var(--navy) 100%);
+    position: relative;
+    content-visibility: auto;
+    contain-intrinsic-size: 0 800px;
+  }
+
+  /* ── HERITAGE SECTION ── */
+  #heritage {
+    padding: 120px 60px;
+    background: var(--navy);
+    position: relative;
+    border-top: 1px solid rgba(0,212,255,0.08);
+    content-visibility: auto;
+    contain-intrinsic-size: 0 700px;
+  }
+
+  /* Frequency tab buttons */
+  .ftab {
+    padding: 10px 22px;
+    background: transparent;
+    border: none;
+    color: rgba(100,140,200,0.6);
+    font-family: 'Orbitron', monospace;
+    font-size: 10px;
+    letter-spacing: 1.5px;
+    cursor: pointer;
+    transition: color 0.2s;
+    white-space: nowrap;
+  }
+  .ftab:hover { color: var(--accent-cyan); }
+  .ftab.active {
+    background: rgba(0,212,255,0.12);
+    color: var(--accent-cyan);
+    border-bottom: 2px solid var(--accent-cyan);
   }
 
   .science-inner { max-width: 1200px; margin: 0 auto; }
@@ -1074,7 +1134,7 @@
     letter-spacing: 1px;
     color: var(--accent-gold);
     text-transform: uppercase;
-    transition: all 0.3s;
+    transition: opacity 0.2s, transform 0.2s;
     cursor: pointer;
   }
 
@@ -1195,7 +1255,7 @@
     font-size: 10px;
     color: var(--accent-cyan);
     letter-spacing: 1px;
-    transition: all 0.3s;
+    transition: opacity 0.2s, transform 0.2s;
   }
 
   .timeline-dot:hover {
@@ -1651,19 +1711,17 @@
 <!-- VIDEO / MINIMALLY INVASIVE SECTION -->
 <section id="video-section">
 
-  <!-- Real video background — looping royalty-free medical/cell footage from Pexels -->
+  <!-- Real video background — lazy loaded when section enters viewport -->
   <video
     id="bg-video"
-    autoplay
     muted
     loop
     playsinline
+    preload="none"
     style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;"
   >
-    <!-- Pexels free-to-use medical microscopy / lab footage -->
-    <source src="https://videos.pexels.com/video-files/3209828/3209828-uhd_2560_1440_25fps.mp4" type="video/mp4"/>
-    <!-- Fallback: blue cells / biotech footage -->
-    <source src="https://videos.pexels.com/video-files/4812205/4812205-hd_1920_1080_25fps.mp4" type="video/mp4"/>
+    <source data-src="https://videos.pexels.com/video-files/3209828/3209828-uhd_2560_1440_25fps.mp4" type="video/mp4"/>
+    <source data-src="https://videos.pexels.com/video-files/4812205/4812205-hd_1920_1080_25fps.mp4" type="video/mp4"/>
   </video>
 
   <!-- Dark tinted overlay so text stays readable -->
@@ -1871,26 +1929,8 @@
 
 </section>
 
-<style>
-.ftab {
-  padding: 10px 22px;
-  background: transparent;
-  border: none;
-  color: rgba(100,140,200,0.6);
-  font-family: 'Orbitron', monospace;
-  font-size: 10px;
-  letter-spacing: 1.5px;
-  cursor: pointer;
-  transition: all 0.3s;
-  white-space: nowrap;
-}
-.ftab:hover { color: var(--accent-cyan); }
-.ftab.active {
-  background: rgba(0,212,255,0.12);
-  color: var(--accent-cyan);
-  border-bottom: 2px solid var(--accent-cyan);
-}
-</style>
+
+
 
 <script>
 // ═══════════════════════════════════════════════
@@ -2108,16 +2148,31 @@ function hexToRgb(hex) {
 }
 
 let settling = false;
-function animate() {
+let cymaticsVisible = false;
+let lastFrame = 0;
+const TARGET_FPS = 30;
+const FRAME_MS = 1000 / TARGET_FPS;
+
+function animate(ts) {
+  animFrame = requestAnimationFrame(animate);
+  if (!cymaticsVisible) return; // pause when off-screen
+  if (ts - lastFrame < FRAME_MS) return; // throttle to 30fps
+  lastFrame = ts;
   if (!settling) {
-    morphProgress = Math.min(1, morphProgress + 0.025);
+    morphProgress = Math.min(1, morphProgress + 0.04);
   }
   const f = FREQS[currentFreq];
   const speed = settling ? 0.08 : 0.22;
   updateParticles(f.m, f.n, speed);
   drawFrame();
-  animFrame = requestAnimationFrame(animate);
 }
+
+// Observe cymatics section — only animate when visible
+const cymaticsSection = document.getElementById('cymatics');
+const cymaticsObserver = new IntersectionObserver((entries) => {
+  cymaticsVisible = entries[0].isIntersecting;
+}, { threshold: 0.1 });
+cymaticsObserver.observe(cymaticsSection);
 
 function selectFreq(idx) {
   prevFreq = currentFreq;
@@ -2144,6 +2199,7 @@ function selectFreq(idx) {
 let cycleIdx = 0;
 function startAutoCycle() {
   cycleTimer = setInterval(() => {
+    if (!cymaticsVisible) return; // skip cycle when hidden
     cycleIdx = (cycleIdx + 1) % FREQS.length;
     selectFreq(cycleIdx);
   }, 5000);
@@ -2163,11 +2219,16 @@ function toggleParticles() {
   document.getElementById('particles-btn').style.color = showParticles ? 'var(--accent-electric)' : 'rgba(100,140,200,0.4)';
 }
 
-// ── Mini sand canvas (bridge section) ──
+// ── Mini sand canvas (bridge section) — throttled ──
 const miniSand = document.getElementById('mini-sand');
 const msCtx = miniSand.getContext('2d');
-let miniAngle = 0;
-function drawMiniSand() {
+let miniSandVisible = false;
+let lastMiniSand = 0;
+function drawMiniSand(ts) {
+  requestAnimationFrame(drawMiniSand);
+  if (!miniSandVisible) return;
+  if (ts - lastMiniSand < 100) return; // ~10fps is enough for static pattern
+  lastMiniSand = ts;
   msCtx.clearRect(0,0,200,200);
   const f = FREQS[currentFreq];
   const imgD = msCtx.createImageData(200,200);
@@ -2184,25 +2245,29 @@ function drawMiniSand() {
     }
   }
   msCtx.putImageData(imgD,0,0);
-  requestAnimationFrame(drawMiniSand);
 }
+const miniSandObs = new IntersectionObserver(e => { miniSandVisible = e[0].isIntersecting; }, {threshold:0.1});
+miniSandObs.observe(miniSand);
 
-// ── Mini cell canvas ──
+// ── Mini cell canvas — throttled ──
 const miniCell = document.getElementById('mini-cell');
 const mcCtx = miniCell.getContext('2d');
 let cellT = 0;
-function drawMiniCell() {
-  mcCtx.clearRect(0,0,200,200);
+let miniCellVisible = false;
+let lastMiniCell = 0;
+function drawMiniCell(ts) {
+  requestAnimationFrame(drawMiniCell);
+  if (!miniCellVisible) return;
+  if (ts - lastMiniCell < FRAME_MS) return;
+  lastMiniCell = ts;
   cellT += 0.02;
+  mcCtx.clearRect(0,0,200,200);
   const f = FREQS[currentFreq];
-  // Pulsing cell membrane
   mcCtx.beginPath(); mcCtx.arc(100,100,80,0,Math.PI*2);
   const bg = mcCtx.createRadialGradient(100,100,0,100,100,80);
   bg.addColorStop(0,'rgba(0,30,80,0.8)'); bg.addColorStop(1,'rgba(0,10,30,0.9)');
   mcCtx.fillStyle=bg; mcCtx.fill();
   mcCtx.strokeStyle=f.color+'90'; mcCtx.lineWidth=1.5; mcCtx.stroke();
-
-  // Frequency ripples from center
   const numRipples = f.m + f.n;
   for(let r=0;r<numRipples;r++){
     const phase = (cellT + r/numRipples)*Math.PI*2;
@@ -2211,27 +2276,30 @@ function drawMiniCell() {
     mcCtx.strokeStyle=f.color+Math.floor(60-r*6).toString(16).padStart(2,'0');
     mcCtx.lineWidth=0.7; mcCtx.stroke();
   }
-
-  // Nucleus
   mcCtx.beginPath(); mcCtx.arc(100,100,22,0,Math.PI*2);
   mcCtx.fillStyle='rgba(0,50,120,0.7)'; mcCtx.fill();
   mcCtx.strokeStyle='rgba(58,245,192,0.5)'; mcCtx.lineWidth=1; mcCtx.stroke();
-
-  // Pulsing dot
   const pr = 6 + Math.sin(cellT*3)*2;
   mcCtx.beginPath(); mcCtx.arc(100,100,pr,0,Math.PI*2);
-  mcCtx.fillStyle=f.color; mcCtx.shadowBlur=10; mcCtx.shadowColor=f.color; mcCtx.fill(); mcCtx.shadowBlur=0;
+  mcCtx.fillStyle=f.color; mcCtx.shadowBlur=6; mcCtx.shadowColor=f.color; mcCtx.fill(); mcCtx.shadowBlur=0;
+}
+const miniCellObs = new IntersectionObserver(e => { miniCellVisible = e[0].isIntersecting; }, {threshold:0.1});
+miniCellObs.observe(miniCell);
 
+// Boot — defer cymatics init until page is idle
+function bootCymatics() {
+  initParticles(1200); // reduce particle count from 1800 → 1200
+  selectFreq(0);
+  animate(0);
+  startAutoCycle();
+  requestAnimationFrame(drawMiniSand);
   requestAnimationFrame(drawMiniCell);
 }
-
-// Boot
-initParticles(1800);
-selectFreq(0);
-animate();
-startAutoCycle();
-drawMiniSand();
-drawMiniCell();
+if ('requestIdleCallback' in window) {
+  requestIdleCallback(bootCymatics, { timeout: 3000 });
+} else {
+  setTimeout(bootCymatics, 500);
+}
 </script>
 
 <!-- SCIENCE SECTION -->
@@ -2487,17 +2555,17 @@ function toggleMute() {
 
 // ── SCROLL REVEAL ──
 const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-const observer = new IntersectionObserver((entries) => {
+const revealObserver = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
+      revealObserver.unobserve(entry.target); // stop watching after reveal
     }
   });
-}, { threshold: 0.1 });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => revealObserver.observe(el));
 
-reveals.forEach(el => observer.observe(el));
-
-// ── MACHINE ASSEMBLY SCROLL ──
+// ── MACHINE ASSEMBLY SCROLL — passive + rAF throttled ──
 const machineSection = document.getElementById('machine');
 const partEpi = document.getElementById('part-epigenetics');
 const partBioem = document.getElementById('part-bioem');
@@ -2506,21 +2574,17 @@ const partClinical = document.getElementById('part-clinical');
 const assembledCore = document.getElementById('assembled-core');
 const assemblyLabel = document.getElementById('assembly-label');
 
-// Starting positions (offset from final)
-// Epigenetics: comes from top (y - 180)
-// BioEM: comes from right (x + 200)
-// Nano: comes from bottom (y + 180)
-// Clinical: comes from left (x - 200)
-
 function lerp(a, b, t) { return a + (b - a) * t; }
 
-window.addEventListener('scroll', () => {
+let scrollTicking = false;
+let lastScrollY = window.scrollY;
+
+function handleMachineScroll() {
   const rect = machineSection.getBoundingClientRect();
   const totalHeight = machineSection.offsetHeight - window.innerHeight;
   const scrolled = -rect.top;
   const progress = Math.max(0, Math.min(1, scrolled / totalHeight));
 
-  // Parts converge 0 -> 0.7
   const partProgress = Math.min(1, progress / 0.7);
   const eased = partProgress < 0.5
     ? 2 * partProgress * partProgress
@@ -2536,27 +2600,50 @@ window.addEventListener('scroll', () => {
   partNano.setAttribute('transform', `translate(0, ${nanoY})`);
   partClinical.setAttribute('transform', `translate(${clinicalX}, 0)`);
 
-  // Opacity
   const partOpacity = Math.min(1, partProgress * 2);
   [partEpi, partBioem, partNano, partClinical].forEach(p => {
     p.style.opacity = partOpacity;
   });
 
-  // Assembled core appears after 0.7
-  const coreProgress = Math.max(0, (progress - 0.7) / 0.3);
-  assembledCore.setAttribute('opacity', coreProgress);
+  assembledCore.setAttribute('opacity', Math.max(0, (progress - 0.7) / 0.3));
 
-  if (progress < 0.05) {
-    assemblyLabel.textContent = 'SCROLL TO ASSEMBLE';
-  } else if (progress < 0.7) {
-    assemblyLabel.textContent = `ASSEMBLING... ${Math.round(eased * 100)}%`;
-  } else {
-    assemblyLabel.textContent = 'VISION SHIELD COMPLETE';
-    assemblyLabel.style.color = 'var(--accent-electric)';
+  if (progress < 0.05) assemblyLabel.textContent = 'SCROLL TO ASSEMBLE';
+  else if (progress < 0.7) assemblyLabel.textContent = `ASSEMBLING... ${Math.round(eased * 100)}%`;
+  else { assemblyLabel.textContent = 'VISION SHIELD COMPLETE'; assemblyLabel.style.color = 'var(--accent-electric)'; }
+
+  scrollTicking = false;
+}
+
+// Only process machine scroll when section is near viewport
+let machineInView = false;
+const machineObserver = new IntersectionObserver(e => { machineInView = e[0].isIntersecting; }, { rootMargin: '200px' });
+machineObserver.observe(machineSection);
+
+window.addEventListener('scroll', () => {
+  if (!machineInView) return;
+  if (!scrollTicking) {
+    requestAnimationFrame(handleMachineScroll);
+    scrollTicking = true;
   }
-});
+}, { passive: true });
 
-// Init parts with offset
+// ── LAZY VIDEO LOAD ──
+const videoSection = document.getElementById('video-section');
+const bgVideo = document.getElementById('bg-video');
+const videoObserver = new IntersectionObserver((entries) => {
+  if (entries[0].isIntersecting) {
+    // Load video sources only when section is about to enter viewport
+    bgVideo.querySelectorAll('source[data-src]').forEach(s => {
+      s.src = s.dataset.src;
+    });
+    bgVideo.load();
+    bgVideo.play().catch(() => {});
+    videoObserver.disconnect();
+  }
+}, { rootMargin: '400px' }); // start loading 400px before it appears
+videoObserver.observe(videoSection);
+
+// Init machine parts
 partEpi.setAttribute('transform', 'translate(0, -180)');
 partEpi.style.opacity = '0';
 partBioem.setAttribute('transform', 'translate(200, 0)');
