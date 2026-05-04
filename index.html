@@ -3,26 +3,21 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Vision International Production — pioneering epigenetics, bioelectromagnetics and electroceuticals to protect people from a broken medical system.">
-<meta name="theme-color" content="#020818">
 <title>Vision International Production</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;600;700&family=Orbitron:wght@400;700&display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@400;600;700&family=Orbitron:wght@400;700&display=swap"></noscript>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Grotesk:wght@300;400;500;600;700&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy: #020818;
-    --deep-blue: #030d2e;
-    --mid-blue: #0a1a4a;
+    --navy: #061428;
+    --deep-blue: #081d3d;
+    --mid-blue: #102550;
     --accent-cyan: #00d4ff;
-    --accent-gold: #d4af37;
+    --accent-gold: #e8c04a;
     --accent-electric: #3af5c0;
     --accent-yellow: #e8f500;
-    --text-primary: #e8f0ff;
-    --text-muted: #7a90b8;
-    --glass: rgba(10,30,80,0.45);
-    --glass-border: rgba(0,212,255,0.18);
+    --text-primary: #eef5ff;
+    --text-muted: #9ab0cc;
+    --glass: rgba(16,45,100,0.50);
+    --glass-border: rgba(0,212,255,0.25);
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,20 +27,19 @@
   body {
     background: var(--navy);
     color: var(--text-primary);
-    font-family: 'Space Grotesk', system-ui, sans-serif;
+    font-family: 'Space Grotesk', sans-serif;
     overflow-x: hidden;
   }
 
-  /* ── NOISE OVERLAY — use contain to avoid repaints ── */
+  /* ── NOISE OVERLAY ── */
   body::before {
     content: '';
     position: fixed;
     inset: 0;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
     pointer-events: none;
     z-index: 9999;
     opacity: 0.4;
-    will-change: auto;
   }
 
   /* ── NAV ── */
@@ -57,11 +51,9 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background: rgba(2,8,24,0.85);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background: rgba(2,8,24,0.7);
+    backdrop-filter: blur(20px);
     border-bottom: 1px solid rgba(0,212,255,0.1);
-    contain: layout style;
   }
 
   .logo {
@@ -114,7 +106,7 @@
     font-size: 12px;
     letter-spacing: 2px;
     text-transform: uppercase;
-    transition: color 0.2s;
+    transition: color 0.3s;
   }
 
   nav ul li a:hover { color: var(--accent-cyan); }
@@ -128,12 +120,102 @@
     letter-spacing: 2px;
     text-transform: uppercase;
     text-decoration: none;
-    transition: background 0.2s, color 0.2s;
+    transition: all 0.3s;
   }
 
   .nav-cta:hover {
     background: var(--accent-cyan) !important;
     color: var(--navy) !important;
+  }
+
+  /* ── COMPANIES DROPDOWN ── */
+  .nav-dropdown {
+    position: relative;
+  }
+
+  .nav-dropdown > a {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .nav-dropdown > a::after {
+    content: '▾';
+    font-size: 10px;
+    transition: transform 0.3s;
+  }
+
+  .nav-dropdown:hover > a::after {
+    transform: rotate(180deg);
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: calc(100% + 16px);
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 220px;
+    background: rgba(6,20,40,0.97);
+    border: 1px solid rgba(0,212,255,0.2);
+    backdrop-filter: blur(20px);
+    padding: 8px 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s;
+    transform: translateX(-50%) translateY(-6px);
+    z-index: 2000;
+  }
+
+  .nav-dropdown:hover .dropdown-menu {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px; height: 8px;
+    background: rgba(6,20,40,0.97);
+    border-left: 1px solid rgba(0,212,255,0.2);
+    border-top: 1px solid rgba(0,212,255,0.2);
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  .dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 20px;
+    text-decoration: none;
+    color: var(--text-muted) !important;
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+  }
+
+  .dropdown-menu a:hover {
+    color: var(--accent-cyan) !important;
+    background: rgba(0,212,255,0.06);
+    border-left-color: var(--accent-cyan);
+  }
+
+  .dropdown-menu a .co-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--accent-gold);
+    flex-shrink: 0;
+  }
+
+  .dropdown-divider {
+    height: 1px;
+    background: rgba(0,212,255,0.1);
+    margin: 4px 0;
   }
 
   /* ── HERO ── */
@@ -149,9 +231,9 @@
     position: absolute;
     inset: 0;
     background:
-      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(0,100,200,0.25) 0%, transparent 70%),
-      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(0,212,255,0.08) 0%, transparent 60%),
-      radial-gradient(ellipse 50% 70% at 80% 20%, rgba(58,245,192,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 60% at 70% 50%, rgba(0,120,220,0.38) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(0,212,255,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 70% at 80% 20%, rgba(58,245,192,0.12) 0%, transparent 60%),
       var(--navy);
   }
 
@@ -160,8 +242,8 @@
     position: absolute;
     inset: 0;
     background-image:
-      linear-gradient(rgba(0,212,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,212,255,0.04) 1px, transparent 1px);
+      linear-gradient(rgba(0,212,255,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,212,255,0.07) 1px, transparent 1px);
     background-size: 80px 80px;
     mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
   }
@@ -174,7 +256,6 @@
     background: linear-gradient(90deg, transparent, var(--accent-cyan), transparent);
     animation: scan 4s ease-in-out infinite;
     opacity: 0.4;
-    will-change: top;
   }
 
   @keyframes scan {
@@ -190,14 +271,12 @@
     transform: translateY(-50%);
     width: 520px;
     height: 520px;
-    will-change: transform;
   }
 
   .cell-svg {
     width: 100%;
     height: 100%;
     animation: cellRotate 20s linear infinite;
-    will-change: transform;
   }
 
   @keyframes cellRotate {
@@ -208,7 +287,6 @@
   .cell-inner {
     animation: cellRotate 15s linear infinite reverse;
     transform-origin: 260px 260px;
-    will-change: transform;
   }
 
   .hero-content {
@@ -282,7 +360,7 @@
     text-transform: uppercase;
     border: none;
     cursor: pointer;
-    transition: background 0.2s, transform 0.2s;
+    transition: all 0.3s;
     clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
   }
 
@@ -302,7 +380,7 @@
     text-transform: uppercase;
     cursor: pointer;
     background: transparent;
-    transition: background 0.2s, border-color 0.2s;
+    transition: all 0.3s;
   }
 
   .btn-ghost:hover {
@@ -312,7 +390,7 @@
 
   .hero-stats {
     position: absolute;
-    bottom: 60px;
+    bottom: 10px;
     left: 60px;
     right: 60px;
     display: flex;
@@ -359,8 +437,6 @@
     padding: 160px 60px;
     background: var(--deep-blue);
     overflow: hidden;
-    content-visibility: auto;
-    contain-intrinsic-size: 0 800px;
   }
 
   #manifesto::before {
@@ -441,7 +517,7 @@
     border-left: 3px solid var(--accent-cyan);
     position: relative;
     overflow: hidden;
-    transition: border-color 0.2s, background 0.2s;
+    transition: border-color 0.3s, background 0.3s;
   }
 
   .pillar-card:hover {
@@ -484,8 +560,6 @@
     position: relative;
     height: 400vh;
     background: var(--navy);
-    content-visibility: auto;
-    contain-intrinsic-size: 0 2000px;
   }
 
   .machine-sticky {
@@ -614,7 +688,6 @@
     border-radius: 50%;
     border: 1px solid rgba(0,212,255,0.15);
     animation: orbitSpin 8s linear infinite;
-    will-change: transform;
   }
 
   .orbit-ring:nth-child(2) {
@@ -655,8 +728,6 @@
     justify-content: center;
     overflow: hidden;
     background: #000;
-    content-visibility: auto;
-    contain-intrinsic-size: 0 100vh;
   }
 
   .video-overlay {
@@ -724,7 +795,7 @@
     align-items: center;
     gap: 16px;
     cursor: pointer;
-    transition: opacity 0.2s, transform 0.2s;
+    transition: all 0.3s;
   }
 
   .play-circle {
@@ -734,7 +805,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: opacity 0.2s, transform 0.2s;
+    transition: all 0.3s;
     position: relative;
   }
 
@@ -844,7 +915,7 @@
     padding: 40px 32px;
     text-align: center;
     overflow: hidden;
-    transition: border-color 0.2s, background 0.2s;
+    transition: all 0.4s;
   }
 
   .cymatic-card:hover {
@@ -960,47 +1031,6 @@
     background: var(--navy);
     position: relative;
     overflow: hidden;
-    content-visibility: auto;
-    contain-intrinsic-size: 0 800px;
-  }
-
-  /* ── ELECTROCEUTICALS ── */
-  #electroceuticals {
-    padding: 160px 60px;
-    background: linear-gradient(180deg, var(--deep-blue) 0%, var(--navy) 100%);
-    position: relative;
-    content-visibility: auto;
-    contain-intrinsic-size: 0 800px;
-  }
-
-  /* ── HERITAGE SECTION ── */
-  #heritage {
-    padding: 120px 60px;
-    background: var(--navy);
-    position: relative;
-    border-top: 1px solid rgba(0,212,255,0.08);
-    content-visibility: auto;
-    contain-intrinsic-size: 0 700px;
-  }
-
-  /* Frequency tab buttons */
-  .ftab {
-    padding: 10px 22px;
-    background: transparent;
-    border: none;
-    color: rgba(100,140,200,0.6);
-    font-family: 'Orbitron', monospace;
-    font-size: 10px;
-    letter-spacing: 1.5px;
-    cursor: pointer;
-    transition: color 0.2s;
-    white-space: nowrap;
-  }
-  .ftab:hover { color: var(--accent-cyan); }
-  .ftab.active {
-    background: rgba(0,212,255,0.12);
-    color: var(--accent-cyan);
-    border-bottom: 2px solid var(--accent-cyan);
   }
 
   .science-inner { max-width: 1200px; margin: 0 auto; }
@@ -1134,7 +1164,7 @@
     letter-spacing: 1px;
     color: var(--accent-gold);
     text-transform: uppercase;
-    transition: opacity 0.2s, transform 0.2s;
+    transition: all 0.3s;
     cursor: pointer;
   }
 
@@ -1186,6 +1216,179 @@
     font-size: 13px;
     color: var(--text-muted);
     line-height: 1.6;
+  }
+
+  /* ── MANUFACTURING SECTION ── */
+  #manufacturing {
+    padding: 160px 60px;
+    background: linear-gradient(180deg, var(--navy) 0%, var(--deep-blue) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+
+  #manufacturing::before {
+    content: 'SCIENCE';
+    position: absolute;
+    left: -30px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-90deg);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 180px;
+    color: rgba(0,212,255,0.03);
+    pointer-events: none;
+    letter-spacing: 20px;
+    white-space: nowrap;
+  }
+
+  .mfg-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .mfg-header {
+    text-align: center;
+    margin-bottom: 80px;
+  }
+
+  .mfg-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .mfg-title span { color: var(--accent-cyan); }
+
+  .mfg-subtitle {
+    font-size: 16px;
+    color: var(--text-muted);
+    max-width: 680px;
+    margin: 0 auto;
+    line-height: 1.8;
+  }
+
+  .mfg-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 80px;
+  }
+
+  .mfg-card {
+    padding: 36px 28px;
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s;
+  }
+
+  .mfg-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(0,212,255,0.4);
+  }
+
+  .mfg-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent-cyan), var(--accent-electric));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s;
+  }
+
+  .mfg-card:hover::after { transform: scaleX(1); }
+
+  .mfg-card-icon {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    letter-spacing: 4px;
+    color: var(--accent-cyan);
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .mfg-card-icon::before {
+    content: '';
+    width: 28px; height: 1px;
+    background: var(--accent-cyan);
+  }
+
+  .mfg-card-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 12px;
+    line-height: 1.3;
+  }
+
+  .mfg-card-body {
+    font-size: 13px;
+    color: var(--text-muted);
+    line-height: 1.7;
+  }
+
+  .mfg-certifications {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 20px;
+  }
+
+  .mfg-cert-badge {
+    padding: 10px 22px;
+    border: 1px solid rgba(0,212,255,0.3);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 10px;
+    letter-spacing: 2px;
+    color: var(--accent-cyan);
+    background: rgba(0,212,255,0.05);
+  }
+
+  .mfg-innovations {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin-top: 80px;
+    align-items: center;
+  }
+
+  .mfg-innovations-text h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    line-height: 1;
+    margin-bottom: 16px;
+  }
+
+  .mfg-innovations-text h3 span { color: var(--accent-electric); }
+
+  .mfg-innovations-text p {
+    font-size: 14px;
+    line-height: 1.8;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+  }
+
+  .mfg-product-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .mfg-tag {
+    padding: 6px 14px;
+    background: rgba(58,245,192,0.07);
+    border: 1px solid rgba(58,245,192,0.25);
+    font-size: 11px;
+    letter-spacing: 1px;
+    color: var(--accent-electric);
+    border-radius: 2px;
   }
 
   /* ── HERITAGE SECTION ── */
@@ -1255,7 +1458,7 @@
     font-size: 10px;
     color: var(--accent-cyan);
     letter-spacing: 1px;
-    transition: opacity 0.2s, transform 0.2s;
+    transition: all 0.3s;
   }
 
   .timeline-dot:hover {
@@ -1436,6 +1639,332 @@
   .reveal:nth-child(2) { transition-delay: 0.1s; }
   .reveal:nth-child(3) { transition-delay: 0.2s; }
   .reveal:nth-child(4) { transition-delay: 0.3s; }
+
+  /* ═══════════════════════════════════════
+     HAMBURGER MENU
+  ═══════════════════════════════════════ */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    background: none;
+    border: none;
+    z-index: 1100;
+  }
+  .hamburger span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: var(--accent-cyan);
+    border-radius: 2px;
+    transition: transform 0.3s, opacity 0.3s;
+    transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+  /* Mobile nav drawer */
+  .mobile-nav {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(2,8,24,0.98);
+    backdrop-filter: blur(20px);
+    z-index: 1050;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .mobile-nav.open {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .mobile-nav a {
+    font-family: 'Orbitron', sans-serif;
+    font-size: 22px;
+    letter-spacing: 4px;
+    color: var(--text-muted);
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+  .mobile-nav a:hover { color: var(--accent-cyan); }
+  .mobile-nav .nav-cta-mobile {
+    margin-top: 16px;
+    padding: 14px 40px;
+    border: 1px solid var(--accent-cyan);
+    color: var(--accent-cyan);
+    font-family: 'Orbitron', sans-serif;
+    font-size: 13px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+
+  /* ═══════════════════════════════════════
+     TABLET — ≤ 1024px
+  ═══════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    nav { padding: 16px 28px; }
+
+    .hero-content { padding: 0 28px; max-width: 100%; }
+    .hero-cell { width: 380px; height: 380px; opacity: 0.5; }
+
+    .manifesto-grid { grid-template-columns: 1fr; gap: 48px; padding: 0; }
+    #manifesto { padding: 80px 28px; }
+
+    .machine-text { left: 28px; max-width: 280px; }
+    .machine-headline { font-size: 42px; }
+    .assembly-area { width: 420px; right: -20px; }
+
+    .cymatics-grid { grid-template-columns: 1fr 1fr; }
+    .cymatics-explanation { grid-template-columns: 1fr; gap: 40px; }
+    #cymatics { padding: 80px 28px; }
+
+    .science-header { grid-template-columns: 1fr; gap: 32px; }
+    .tech-grid { grid-template-columns: repeat(2, 1fr); }
+    #science { padding: 80px 28px; }
+
+    .electro-layout { grid-template-columns: 1fr; gap: 48px; }
+    .electro-visual { height: 360px; }
+    #electroceuticals { padding: 80px 28px; }
+
+    .heritage-timeline { grid-template-columns: repeat(2, 1fr); gap: 40px; }
+    .heritage-timeline::before { display: none; }
+    #heritage { padding: 80px 28px; }
+
+    .mfg-grid { grid-template-columns: repeat(2, 1fr); }
+    .mfg-innovations { grid-template-columns: 1fr; }
+    #manufacturing { padding: 80px 28px; }
+
+    .scientist-highlight { padding: 32px; }
+
+    #cta-section { padding: 80px 28px; }
+    .cta-buttons { flex-direction: column; align-items: center; }
+
+    footer { padding: 40px 28px; }
+    .footer-inner { flex-direction: column; gap: 24px; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; gap: 20px; }
+  }
+
+  /* ═══════════════════════════════════════
+     MOBILE — ≤ 768px
+  ═══════════════════════════════════════ */
+  @media (max-width: 768px) {
+
+    /* ── NAV ── */
+    nav { padding: 16px 20px; }
+    nav ul { display: none; }
+    .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .mobile-nav { display: flex; }
+
+    /* ── HERO ── */
+    #hero {
+      height: 100svh;
+      align-items: flex-end;
+      padding-bottom: 100px;
+    }
+    .hero-content {
+      padding: 80px 20px 0;
+      max-width: 100%;
+      position: relative;
+      z-index: 10;
+    }
+    .hero-cell {
+      width: 280px;
+      height: 280px;
+      right: -60px;
+      top: 10%;
+      transform: none;
+      opacity: 0.3;
+    }
+    .hero-title { font-size: clamp(56px, 14vw, 80px); }
+    .hero-sub { font-size: 14px; margin-bottom: 28px; }
+    .hero-cta-row { flex-direction: column; align-items: flex-start; gap: 12px; }
+    .btn-primary, .btn-ghost { width: 100%; text-align: center; padding: 14px 20px; }
+
+    .hero-stats {
+      bottom: 20px;
+      left: 20px;
+      right: 20px;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .stat-num { font-size: 20px; }
+    .stat-label { font-size: 9px; }
+    .hero-line { display: none; }
+
+    /* ── MANIFESTO ── */
+    #manifesto { padding: 60px 20px; }
+    #manifesto::before { display: none; }
+    .manifesto-grid { grid-template-columns: 1fr; gap: 40px; }
+    .manifesto-title { font-size: 44px; }
+    .manifesto-body { font-size: 14px; }
+
+    /* ── MACHINE ASSEMBLY ── */
+    /* Simplify scroll section on mobile — static layout, no sticky */
+    #machine { height: auto; }
+    .machine-sticky {
+      position: relative;
+      height: auto;
+      flex-direction: column;
+      padding: 60px 20px;
+      gap: 40px;
+      align-items: flex-start;
+    }
+    .machine-bg, .machine-grid { display: none; }
+    .machine-text {
+      position: relative;
+      top: auto; left: auto;
+      transform: none;
+      max-width: 100%;
+    }
+    .machine-headline { font-size: 38px; }
+    .assembly-area {
+      width: 100%;
+      height: 320px;
+      right: 0;
+      position: relative;
+    }
+    #assembly-svg { width: 100%; height: 100%; }
+
+    /* ── VIDEO SECTION ── */
+    #video-section { height: 85svh; justify-content: flex-start; }
+    .video-content { padding: 100px 20px 0; max-width: 100%; }
+    .video-headline { font-size: clamp(40px, 10vw, 60px); }
+    .video-body { font-size: 13px; margin-bottom: 24px; }
+    .floating-data { display: none; }
+    .video-overlay {
+      background:
+        linear-gradient(to bottom, rgba(2,8,24,0.6) 0%, rgba(2,8,24,0.3) 40%, rgba(2,8,24,0.7) 100%);
+    }
+
+    /* ── CYMATICS ── */
+    #cymatics { padding: 60px 20px 0; }
+    #cymatics > div:first-child { padding: 60px 20px 40px; }
+
+    /* Frequency tabs — horizontal scroll */
+    #freq-tabs {
+      width: 100%;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
+    }
+    #freq-tabs::-webkit-scrollbar { display: none; }
+    .ftab { white-space: nowrap; font-size: 9px; padding: 8px 14px; }
+
+    /* Canvas grid → stacked */
+    .cymatics-stage-grid {
+      grid-template-columns: 1fr !important;
+      gap: 24px !important;
+    }
+    /* Info panel */
+    #freq-info { padding: 20px; }
+    #freq-hz { font-size: 30px; }
+    #freq-name { font-size: 9px; }
+    #freq-sand, #freq-bio { font-size: 12px; }
+
+    /* Bridge section */
+    .cymatics-bridge-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+      padding: 60px 20px !important;
+    }
+    .cymatics-bridge-grid > div:nth-child(2) {
+      display: none; /* hide vertical arrow on mobile */
+    }
+
+    /* Bottom 3-col explainer → 1 col */
+    .cymatics-explainer-grid {
+      grid-template-columns: 1fr !important;
+      margin-top: 32px !important;
+    }
+
+    /* Freq spectrum section */
+    .cymatics-spectrum-wrap { padding: 60px 20px !important; }
+    .cymatics-spectrum-grid {
+      grid-template-columns: 1fr !important;
+      gap: 40px !important;
+    }
+    .freq-bar-row { gap: 8px; }
+    .freq-label { width: 60px; font-size: 9px; }
+    .freq-effect { width: 80px; font-size: 11px; }
+
+    /* ── SCIENCE ── */
+    #science { padding: 60px 20px; }
+    .science-header { grid-template-columns: 1fr; gap: 24px; }
+    .science-title { font-size: clamp(40px, 10vw, 60px); }
+    .tech-grid { grid-template-columns: 1fr 1fr; }
+    .tech-item { padding: 24px 18px; }
+
+    /* ── ELECTROCEUTICALS ── */
+    #electroceuticals { padding: 60px 20px; }
+    .electro-layout { grid-template-columns: 1fr; gap: 40px; }
+    .electro-title { font-size: clamp(44px, 11vw, 60px); }
+    .electro-visual { height: 300px; }
+    .product-types { grid-template-columns: repeat(2, 1fr); }
+    .telehealth-card { padding: 20px; }
+
+    /* ── HERITAGE ── */
+    #heritage { padding: 60px 20px; }
+    .heritage-title { font-size: clamp(40px, 10vw, 56px); }
+    .heritage-sub { font-size: 14px; margin-bottom: 40px; }
+    .heritage-timeline {
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    .heritage-timeline::before { display: none; }
+    .timeline-item { padding: 0 8px; }
+    .timeline-dot { width: 56px; height: 56px; font-size: 8px; }
+    .scientist-highlight { padding: 24px 20px; }
+    .quote-text { font-size: 15px; }
+    .quote-attr { font-size: 9px; letter-spacing: 1px; }
+
+    /* ── CTA ── */
+    #cta-section { padding: 60px 20px; }
+    .cta-title { font-size: clamp(52px, 13vw, 80px); }
+    .cta-body { font-size: 14px; }
+    .cta-buttons { flex-direction: column; align-items: center; gap: 12px; }
+    .cta-buttons .btn-primary,
+    .cta-buttons .btn-ghost { width: 100%; max-width: 320px; }
+    .orbit-container { display: none; }
+
+    /* ── FOOTER ── */
+    footer { padding: 40px 20px; }
+    .footer-inner { flex-direction: column; gap: 20px; text-align: center; }
+    .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px; }
+
+    /* Reduce reveal animation distance on mobile */
+    .reveal { transform: translateY(16px); }
+    .reveal-left { transform: translateX(-20px); }
+    .reveal-right { transform: translateX(20px); }
+  }
+
+  /* ═══════════════════════════════════════
+     SMALL MOBILE — ≤ 480px
+  ═══════════════════════════════════════ */
+  @media (max-width: 480px) {
+    .hero-title { font-size: clamp(48px, 13vw, 64px); }
+    .hero-eyebrow { font-size: 9px; letter-spacing: 3px; }
+    .manifesto-title { font-size: 36px; }
+    .tech-grid { grid-template-columns: 1fr; }
+    .heritage-timeline { grid-template-columns: 1fr; }
+    .cymatics-grid { grid-template-columns: 1fr; }
+    .btn-primary, .btn-ghost { font-size: 10px; letter-spacing: 1px; }
+    .machine-headline { font-size: 32px; }
+    #freq-info { padding: 16px; }
+    .scientist-highlight { padding: 20px 16px; }
+  }
 </style>
 </head>
 <body>
@@ -1455,9 +1984,37 @@
     <li><a href="#cymatics">Technology</a></li>
     <li><a href="#electroceuticals">Products</a></li>
     <li><a href="#heritage">Heritage</a></li>
+    <li class="nav-dropdown">
+      <a href="#">Our Companies</a>
+      <div class="dropdown-menu">
+        <a href="https://www.haby.com" target="_blank" rel="noopener"><span class="co-dot"></span>Haby.com</a>
+        <div class="dropdown-divider"></div>
+        <a href="https://www.innonutra.com" target="_blank" rel="noopener"><span class="co-dot" style="background:var(--accent-cyan)"></span>InnoNutra.com</a>
+        <div class="dropdown-divider"></div>
+        <a href="https://www.vitakel.com" target="_blank" rel="noopener"><span class="co-dot" style="background:var(--accent-electric)"></span>Vitakel.com</a>
+      </div>
+    </li>
   </ul>
   <a href="#cta-section" class="nav-cta">Get Protected</a>
+  <!-- Hamburger — mobile only -->
+  <button class="hamburger" id="hamburger" aria-label="Open menu" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+
+<!-- Mobile Nav Drawer -->
+<div class="mobile-nav" id="mobile-nav" role="dialog" aria-modal="true" aria-label="Navigation">
+  <a href="#manifesto" class="mobile-nav-link">About</a>
+  <a href="#science" class="mobile-nav-link">Science</a>
+  <a href="#cymatics" class="mobile-nav-link">Technology</a>
+  <a href="#electroceuticals" class="mobile-nav-link">Products</a>
+  <a href="#heritage" class="mobile-nav-link">Heritage</a>
+  <div style="padding:16px 0 8px;font-family:'Orbitron',sans-serif;font-size:9px;letter-spacing:3px;color:var(--accent-gold);text-transform:uppercase">Our Companies</div>
+  <a href="https://www.haby.com" class="mobile-nav-link" target="_blank" rel="noopener" style="font-size:11px">↗ Haby.com</a>
+  <a href="https://www.innonutra.com" class="mobile-nav-link" target="_blank" rel="noopener" style="font-size:11px">↗ InnoNutra.com</a>
+  <a href="https://www.vitakel.com" class="mobile-nav-link" target="_blank" rel="noopener" style="font-size:11px">↗ Vitakel.com</a>
+  <a href="#cta-section" class="nav-cta-mobile">Get Protected</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -1711,17 +2268,19 @@
 <!-- VIDEO / MINIMALLY INVASIVE SECTION -->
 <section id="video-section">
 
-  <!-- Real video background — lazy loaded when section enters viewport -->
+  <!-- Real video background — looping royalty-free medical/cell footage from Pexels -->
   <video
     id="bg-video"
+    autoplay
     muted
     loop
     playsinline
-    preload="none"
     style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;"
   >
-    <source data-src="https://videos.pexels.com/video-files/3209828/3209828-uhd_2560_1440_25fps.mp4" type="video/mp4"/>
-    <source data-src="https://videos.pexels.com/video-files/4812205/4812205-hd_1920_1080_25fps.mp4" type="video/mp4"/>
+    <!-- Pexels free-to-use medical microscopy / lab footage -->
+    <source src="https://videos.pexels.com/video-files/3209828/3209828-uhd_2560_1440_25fps.mp4" type="video/mp4"/>
+    <!-- Fallback: blue cells / biotech footage -->
+    <source src="https://videos.pexels.com/video-files/4812205/4812205-hd_1920_1080_25fps.mp4" type="video/mp4"/>
   </video>
 
   <!-- Dark tinted overlay so text stays readable -->
@@ -1812,7 +2371,7 @@
       </div>
 
       <!-- Canvas stage + right-side info -->
-      <div style="display:grid;grid-template-columns:1fr 400px;gap:60px;width:100%;max-width:1200px;align-items:center;">
+      <div class="cymatics-stage-grid" style="display:grid;grid-template-columns:1fr 400px;gap:60px;width:100%;max-width:1200px;align-items:center;">
 
         <!-- Chladni canvas -->
         <div style="position:relative;">
@@ -1856,7 +2415,7 @@
 
   <!-- BRIDGE: Sand → Cell -->
   <div style="background:linear-gradient(135deg,#020d28 0%,#030e1e 100%);border-top:1px solid rgba(0,212,255,0.08);border-bottom:1px solid rgba(0,212,255,0.08);padding:100px 60px;">
-    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 60px 1fr;gap:0;align-items:center;">
+    <div class="cymatics-bridge-grid" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 60px 1fr;gap:0;align-items:center;">
 
       <!-- Left: Sand board -->
       <div class="reveal-left" style="text-align:center;">
@@ -1886,7 +2445,7 @@
     </div>
 
     <!-- Bottom explanation row -->
-    <div style="max-width:1100px;margin:60px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(0,212,255,0.06);">
+    <div class="cymatics-explainer-grid" style="max-width:1100px;margin:60px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:2px;background:rgba(0,212,255,0.06);">
       <div style="background:var(--deep-blue);padding:32px 28px;">
         <div style="font-family:'Orbitron',monospace;font-size:10px;letter-spacing:3px;color:var(--accent-gold);margin-bottom:12px;">01 / RESONANCE</div>
         <div style="font-size:14px;font-weight:600;color:var(--text-primary);margin-bottom:8px;">Everything Vibrates</div>
@@ -1906,8 +2465,8 @@
   </div>
 
   <!-- Frequency bar spectrum — kept from before -->
-  <div style="padding:80px 60px;background:var(--navy);">
-    <div style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
+  <div class="cymatics-spectrum-wrap" style="padding:80px 60px;background:var(--navy);">
+    <div class="cymatics-spectrum-grid" style="max-width:1200px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;">
       <div class="reveal-left">
         <div class="section-eyebrow" style="margin-bottom:20px;">Targeted Applications</div>
         <h3 style="font-family:'Bebas Neue',sans-serif;font-size:48px;line-height:1;margin-bottom:20px;">THE BODY<br>SPEAKS IN <span style="color:var(--accent-electric)">FREQUENCIES</span></h3>
@@ -1929,8 +2488,26 @@
 
 </section>
 
-
-
+<style>
+.ftab {
+  padding: 10px 22px;
+  background: transparent;
+  border: none;
+  color: rgba(100,140,200,0.6);
+  font-family: 'Orbitron', monospace;
+  font-size: 10px;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  transition: all 0.3s;
+  white-space: nowrap;
+}
+.ftab:hover { color: var(--accent-cyan); }
+.ftab.active {
+  background: rgba(0,212,255,0.12);
+  color: var(--accent-cyan);
+  border-bottom: 2px solid var(--accent-cyan);
+}
+</style>
 
 <script>
 // ═══════════════════════════════════════════════
@@ -2148,31 +2725,16 @@ function hexToRgb(hex) {
 }
 
 let settling = false;
-let cymaticsVisible = false;
-let lastFrame = 0;
-const TARGET_FPS = 30;
-const FRAME_MS = 1000 / TARGET_FPS;
-
-function animate(ts) {
-  animFrame = requestAnimationFrame(animate);
-  if (!cymaticsVisible) return; // pause when off-screen
-  if (ts - lastFrame < FRAME_MS) return; // throttle to 30fps
-  lastFrame = ts;
+function animate() {
   if (!settling) {
-    morphProgress = Math.min(1, morphProgress + 0.04);
+    morphProgress = Math.min(1, morphProgress + 0.025);
   }
   const f = FREQS[currentFreq];
   const speed = settling ? 0.08 : 0.22;
   updateParticles(f.m, f.n, speed);
   drawFrame();
+  animFrame = requestAnimationFrame(animate);
 }
-
-// Observe cymatics section — only animate when visible
-const cymaticsSection = document.getElementById('cymatics');
-const cymaticsObserver = new IntersectionObserver((entries) => {
-  cymaticsVisible = entries[0].isIntersecting;
-}, { threshold: 0.1 });
-cymaticsObserver.observe(cymaticsSection);
 
 function selectFreq(idx) {
   prevFreq = currentFreq;
@@ -2199,7 +2761,6 @@ function selectFreq(idx) {
 let cycleIdx = 0;
 function startAutoCycle() {
   cycleTimer = setInterval(() => {
-    if (!cymaticsVisible) return; // skip cycle when hidden
     cycleIdx = (cycleIdx + 1) % FREQS.length;
     selectFreq(cycleIdx);
   }, 5000);
@@ -2219,16 +2780,11 @@ function toggleParticles() {
   document.getElementById('particles-btn').style.color = showParticles ? 'var(--accent-electric)' : 'rgba(100,140,200,0.4)';
 }
 
-// ── Mini sand canvas (bridge section) — throttled ──
+// ── Mini sand canvas (bridge section) ──
 const miniSand = document.getElementById('mini-sand');
 const msCtx = miniSand.getContext('2d');
-let miniSandVisible = false;
-let lastMiniSand = 0;
-function drawMiniSand(ts) {
-  requestAnimationFrame(drawMiniSand);
-  if (!miniSandVisible) return;
-  if (ts - lastMiniSand < 100) return; // ~10fps is enough for static pattern
-  lastMiniSand = ts;
+let miniAngle = 0;
+function drawMiniSand() {
   msCtx.clearRect(0,0,200,200);
   const f = FREQS[currentFreq];
   const imgD = msCtx.createImageData(200,200);
@@ -2245,29 +2801,25 @@ function drawMiniSand(ts) {
     }
   }
   msCtx.putImageData(imgD,0,0);
+  requestAnimationFrame(drawMiniSand);
 }
-const miniSandObs = new IntersectionObserver(e => { miniSandVisible = e[0].isIntersecting; }, {threshold:0.1});
-miniSandObs.observe(miniSand);
 
-// ── Mini cell canvas — throttled ──
+// ── Mini cell canvas ──
 const miniCell = document.getElementById('mini-cell');
 const mcCtx = miniCell.getContext('2d');
 let cellT = 0;
-let miniCellVisible = false;
-let lastMiniCell = 0;
-function drawMiniCell(ts) {
-  requestAnimationFrame(drawMiniCell);
-  if (!miniCellVisible) return;
-  if (ts - lastMiniCell < FRAME_MS) return;
-  lastMiniCell = ts;
-  cellT += 0.02;
+function drawMiniCell() {
   mcCtx.clearRect(0,0,200,200);
+  cellT += 0.02;
   const f = FREQS[currentFreq];
+  // Pulsing cell membrane
   mcCtx.beginPath(); mcCtx.arc(100,100,80,0,Math.PI*2);
   const bg = mcCtx.createRadialGradient(100,100,0,100,100,80);
   bg.addColorStop(0,'rgba(0,30,80,0.8)'); bg.addColorStop(1,'rgba(0,10,30,0.9)');
   mcCtx.fillStyle=bg; mcCtx.fill();
   mcCtx.strokeStyle=f.color+'90'; mcCtx.lineWidth=1.5; mcCtx.stroke();
+
+  // Frequency ripples from center
   const numRipples = f.m + f.n;
   for(let r=0;r<numRipples;r++){
     const phase = (cellT + r/numRipples)*Math.PI*2;
@@ -2276,30 +2828,27 @@ function drawMiniCell(ts) {
     mcCtx.strokeStyle=f.color+Math.floor(60-r*6).toString(16).padStart(2,'0');
     mcCtx.lineWidth=0.7; mcCtx.stroke();
   }
+
+  // Nucleus
   mcCtx.beginPath(); mcCtx.arc(100,100,22,0,Math.PI*2);
   mcCtx.fillStyle='rgba(0,50,120,0.7)'; mcCtx.fill();
   mcCtx.strokeStyle='rgba(58,245,192,0.5)'; mcCtx.lineWidth=1; mcCtx.stroke();
+
+  // Pulsing dot
   const pr = 6 + Math.sin(cellT*3)*2;
   mcCtx.beginPath(); mcCtx.arc(100,100,pr,0,Math.PI*2);
-  mcCtx.fillStyle=f.color; mcCtx.shadowBlur=6; mcCtx.shadowColor=f.color; mcCtx.fill(); mcCtx.shadowBlur=0;
-}
-const miniCellObs = new IntersectionObserver(e => { miniCellVisible = e[0].isIntersecting; }, {threshold:0.1});
-miniCellObs.observe(miniCell);
+  mcCtx.fillStyle=f.color; mcCtx.shadowBlur=10; mcCtx.shadowColor=f.color; mcCtx.fill(); mcCtx.shadowBlur=0;
 
-// Boot — defer cymatics init until page is idle
-function bootCymatics() {
-  initParticles(1200); // reduce particle count from 1800 → 1200
-  selectFreq(0);
-  animate(0);
-  startAutoCycle();
-  requestAnimationFrame(drawMiniSand);
   requestAnimationFrame(drawMiniCell);
 }
-if ('requestIdleCallback' in window) {
-  requestIdleCallback(bootCymatics, { timeout: 3000 });
-} else {
-  setTimeout(bootCymatics, 500);
-}
+
+// Boot
+initParticles(1800);
+selectFreq(0);
+animate();
+startAutoCycle();
+drawMiniSand();
+drawMiniCell();
 </script>
 
 <!-- SCIENCE SECTION -->
@@ -2459,6 +3008,141 @@ if ('requestIdleCallback' in window) {
   </div>
 </section>
 
+<!-- MANUFACTURING & SCIENCE (powered by InnoNutra) -->
+<section id="manufacturing">
+  <div class="mfg-inner">
+    <div class="mfg-header reveal">
+      <div class="section-eyebrow" style="justify-content:center;margin-bottom:16px">Science · Manufacturing · Distribution</div>
+      <h2 class="mfg-title">WHERE <span>SCIENCE</span><br>BECOMES REALITY</h2>
+      <p class="mfg-subtitle">Vision International's products are born in pharmaceutical-grade facilities, developed by scientists, and distributed with precision. From formulation to your hands — every step is controlled, documented, and validated.</p>
+    </div>
+
+    <div class="mfg-grid reveal">
+      <div class="mfg-card">
+        <div class="mfg-card-icon">Facility</div>
+        <div class="mfg-card-title">cGMP FDA/DEA Approved Manufacturing</div>
+        <div class="mfg-card-body">Developed and manufactured in a cGMP FDA/DEA pharmaceutical-approved facility and GMP nutraceutical plant. Equipped with analytical, R&D, and manufacturing technologies necessary to file ANDAs and NDAs.</div>
+      </div>
+      <div class="mfg-card">
+        <div class="mfg-card-icon">Science</div>
+        <div class="mfg-card-title">Advanced Formulation Technology</div>
+        <div class="mfg-card-body">Wet and dry granulations, direct blends, pellet formulations, coating, tableting, and encapsulation. Microencapsulation for time-release delivery to targeted sites — stomach, upper intestine, colon, or all sequentially.</div>
+      </div>
+      <div class="mfg-card">
+        <div class="mfg-card-icon">Quality</div>
+        <div class="mfg-card-title">Purity, Potency & Truth in Labelling</div>
+        <div class="mfg-card-body">High scrutiny on quality and purity of ingredients with a focus on reduced fillers and additives. Metered dosing technology ensures what's on the label is what's in the product — no exceptions.</div>
+      </div>
+      <div class="mfg-card">
+        <div class="mfg-card-icon">Delivery</div>
+        <div class="mfg-card-title">Patented Delivery Innovations</div>
+        <div class="mfg-card-body">World-first K-Cup 100% dose technology, Button Blast dosing caps, Sport Blast drink-through caps, and dissolving-bead straws — keeping active ingredients separate until time of use for maximum stability and potency.</div>
+      </div>
+      <div class="mfg-card">
+        <div class="mfg-card-icon">Research</div>
+        <div class="mfg-card-title">Science-Backed Formulations</div>
+        <div class="mfg-card-body">Every compound is selected from peer-reviewed research. Our bioregulators, electroceuticals, and nutraceuticals are validated through clinical studies — not marketing claims. Peer-reviewed. Physician-tested. People-proven.</div>
+      </div>
+      <div class="mfg-card">
+        <div class="mfg-card-icon">Distribution</div>
+        <div class="mfg-card-title">Global Scale Distribution</div>
+        <div class="mfg-card-body">From pharmaceutical-grade production to precision fulfillment — Vision International manages the full supply chain. Regulatory compliance across international markets with complete batch traceability at every step.</div>
+      </div>
+    </div>
+
+    <div class="mfg-certifications reveal">
+      <div class="mfg-cert-badge">cGMP Certified</div>
+      <div class="mfg-cert-badge">FDA / DEA Approved</div>
+      <div class="mfg-cert-badge">GMP Nutraceutical</div>
+      <div class="mfg-cert-badge">ANDA / NDA Ready</div>
+      <div class="mfg-cert-badge">Full Batch Traceability</div>
+    </div>
+
+    <div class="mfg-innovations reveal">
+      <div class="mfg-innovations-text">
+        <div class="section-eyebrow">Patent-Protected Innovation</div>
+        <h3>DELIVERY <span>TECHNOLOGY</span><br>THAT CHANGES EVERYTHING</h3>
+        <p>Most supplements are dead before they reach you. Chemical reactions, heat processing, and shelf instability destroy active compounds in conventional manufacturing. Vision's patented dosing technologies keep ingredients separated until the exact moment of use — delivering 100% of every active compound, every time.</p>
+        <p>Zero sugar. Zero stabilizers. Zero fillers. Zero artificial preservatives. For the first time in history, formulas can be designed for therapeutic effectiveness — not for what chemistry allows.</p>
+        <div class="mfg-product-tags">
+          <span class="mfg-tag">K-Cup 100% Dose</span>
+          <span class="mfg-tag">Blast Cap Technology</span>
+          <span class="mfg-tag">Dissolving Bead Straws</span>
+          <span class="mfg-tag">Pharma Blast Injectable</span>
+          <span class="mfg-tag">Microencapsulation</span>
+          <span class="mfg-tag">Time-Release Coatings</span>
+          <span class="mfg-tag">Water-Soluble CBD</span>
+        </div>
+      </div>
+      <div style="position:relative">
+        <!-- Manufacturing diagram SVG -->
+        <svg viewBox="0 0 440 420" xmlns="http://www.w3.org/2000/svg" width="100%">
+          <defs>
+            <radialGradient id="mfgGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#00d4ff" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="#00d4ff" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <!-- Background glow -->
+          <circle cx="220" cy="210" r="180" fill="url(#mfgGlow)"/>
+          <!-- Outer ring -->
+          <circle cx="220" cy="210" r="160" fill="none" stroke="rgba(0,212,255,0.12)" stroke-width="1" stroke-dasharray="4 8"/>
+          <!-- Middle ring -->
+          <circle cx="220" cy="210" r="110" fill="none" stroke="rgba(0,212,255,0.18)" stroke-width="1"/>
+          <!-- Inner core -->
+          <circle cx="220" cy="210" r="60" fill="rgba(0,30,70,0.8)" stroke="rgba(0,212,255,0.4)" stroke-width="1.5"/>
+          <text x="220" y="205" text-anchor="middle" fill="rgba(0,212,255,0.9)" font-family="Orbitron,monospace" font-size="9" letter-spacing="2">VISION</text>
+          <text x="220" y="221" text-anchor="middle" fill="rgba(0,212,255,0.6)" font-family="Orbitron,monospace" font-size="7" letter-spacing="1">MANUFACTURING</text>
+          <!-- Stage nodes -->
+          <circle cx="220" cy="50" r="28" fill="rgba(10,40,90,0.9)" stroke="rgba(0,212,255,0.5)" stroke-width="1.5"/>
+          <text x="220" y="46" text-anchor="middle" fill="#e8c04a" font-family="Orbitron,monospace" font-size="7" letter-spacing="1">R&amp;D</text>
+          <text x="220" y="59" text-anchor="middle" fill="rgba(0,212,255,0.7)" font-family="monospace" font-size="6">FORMULATION</text>
+
+          <circle cx="369" cy="130" r="28" fill="rgba(10,40,90,0.9)" stroke="rgba(58,245,192,0.5)" stroke-width="1.5"/>
+          <text x="369" y="126" text-anchor="middle" fill="#3af5c0" font-family="Orbitron,monospace" font-size="7" letter-spacing="1">GMP</text>
+          <text x="369" y="139" text-anchor="middle" fill="rgba(58,245,192,0.7)" font-family="monospace" font-size="6">PRODUCTION</text>
+
+          <circle cx="369" cy="290" r="28" fill="rgba(10,40,90,0.9)" stroke="rgba(212,175,55,0.5)" stroke-width="1.5"/>
+          <text x="369" y="286" text-anchor="middle" fill="#e8c04a" font-family="Orbitron,monospace" font-size="7" letter-spacing="1">QC</text>
+          <text x="369" y="299" text-anchor="middle" fill="rgba(212,175,55,0.7)" font-family="monospace" font-size="6">TESTING</text>
+
+          <circle cx="220" cy="370" r="28" fill="rgba(10,40,90,0.9)" stroke="rgba(0,212,255,0.5)" stroke-width="1.5"/>
+          <text x="220" y="366" text-anchor="middle" fill="#00d4ff" font-family="Orbitron,monospace" font-size="7" letter-spacing="1">PACK</text>
+          <text x="220" y="379" text-anchor="middle" fill="rgba(0,212,255,0.7)" font-family="monospace" font-size="6">LABELLING</text>
+
+          <circle cx="71" cy="290" r="28" fill="rgba(10,40,90,0.9)" stroke="rgba(0,212,255,0.5)" stroke-width="1.5"/>
+          <text x="71" y="286" text-anchor="middle" fill="#00d4ff" font-family="Orbitron,monospace" font-size="7" letter-spacing="1">DIST</text>
+          <text x="71" y="299" text-anchor="middle" fill="rgba(0,212,255,0.7)" font-family="monospace" font-size="6">FULFILMENT</text>
+
+          <circle cx="71" cy="130" r="28" fill="rgba(10,40,90,0.9)" stroke="rgba(58,245,192,0.5)" stroke-width="1.5"/>
+          <text x="71" y="126" text-anchor="middle" fill="#3af5c0" font-family="Orbitron,monospace" font-size="7" letter-spacing="1">RAW</text>
+          <text x="71" y="139" text-anchor="middle" fill="rgba(58,245,192,0.7)" font-family="monospace" font-size="6">SOURCING</text>
+
+          <!-- Connecting lines -->
+          <line x1="220" y1="78" x2="343" y2="112" stroke="rgba(0,212,255,0.2)" stroke-width="1" stroke-dasharray="4 6">
+            <animate attributeName="stroke-dashoffset" values="0;-20" dur="2s" repeatCount="indefinite"/>
+          </line>
+          <line x1="369" y1="158" x2="369" y2="262" stroke="rgba(58,245,192,0.2)" stroke-width="1" stroke-dasharray="4 6">
+            <animate attributeName="stroke-dashoffset" values="0;-20" dur="2.4s" repeatCount="indefinite"/>
+          </line>
+          <line x1="345" y1="308" x2="248" y2="348" stroke="rgba(212,175,55,0.2)" stroke-width="1" stroke-dasharray="4 6">
+            <animate attributeName="stroke-dashoffset" values="0;-20" dur="2.1s" repeatCount="indefinite"/>
+          </line>
+          <line x1="192" y1="368" x2="99" y2="308" stroke="rgba(0,212,255,0.2)" stroke-width="1" stroke-dasharray="4 6">
+            <animate attributeName="stroke-dashoffset" values="0;-20" dur="1.8s" repeatCount="indefinite"/>
+          </line>
+          <line x1="71" y1="262" x2="71" y2="158" stroke="rgba(58,245,192,0.2)" stroke-width="1" stroke-dasharray="4 6">
+            <animate attributeName="stroke-dashoffset" values="0;-20" dur="2.3s" repeatCount="indefinite"/>
+          </line>
+          <line x1="97" y1="112" x2="192" y2="78" stroke="rgba(0,212,255,0.2)" stroke-width="1" stroke-dasharray="4 6">
+            <animate attributeName="stroke-dashoffset" values="0;-20" dur="2s" repeatCount="indefinite"/>
+          </line>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- HERITAGE -->
 <section id="heritage">
   <div class="heritage-inner">
@@ -2555,17 +3239,17 @@ function toggleMute() {
 
 // ── SCROLL REVEAL ──
 const reveals = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-const revealObserver = new IntersectionObserver((entries) => {
+const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {
       entry.target.classList.add('visible');
-      revealObserver.unobserve(entry.target); // stop watching after reveal
     }
   });
-}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-reveals.forEach(el => revealObserver.observe(el));
+}, { threshold: 0.1 });
 
-// ── MACHINE ASSEMBLY SCROLL — passive + rAF throttled ──
+reveals.forEach(el => observer.observe(el));
+
+// ── MACHINE ASSEMBLY SCROLL ──
 const machineSection = document.getElementById('machine');
 const partEpi = document.getElementById('part-epigenetics');
 const partBioem = document.getElementById('part-bioem');
@@ -2574,17 +3258,21 @@ const partClinical = document.getElementById('part-clinical');
 const assembledCore = document.getElementById('assembled-core');
 const assemblyLabel = document.getElementById('assembly-label');
 
+// Starting positions (offset from final)
+// Epigenetics: comes from top (y - 180)
+// BioEM: comes from right (x + 200)
+// Nano: comes from bottom (y + 180)
+// Clinical: comes from left (x - 200)
+
 function lerp(a, b, t) { return a + (b - a) * t; }
 
-let scrollTicking = false;
-let lastScrollY = window.scrollY;
-
-function handleMachineScroll() {
+window.addEventListener('scroll', () => {
   const rect = machineSection.getBoundingClientRect();
   const totalHeight = machineSection.offsetHeight - window.innerHeight;
   const scrolled = -rect.top;
   const progress = Math.max(0, Math.min(1, scrolled / totalHeight));
 
+  // Parts converge 0 -> 0.7
   const partProgress = Math.min(1, progress / 0.7);
   const eased = partProgress < 0.5
     ? 2 * partProgress * partProgress
@@ -2600,50 +3288,27 @@ function handleMachineScroll() {
   partNano.setAttribute('transform', `translate(0, ${nanoY})`);
   partClinical.setAttribute('transform', `translate(${clinicalX}, 0)`);
 
+  // Opacity
   const partOpacity = Math.min(1, partProgress * 2);
   [partEpi, partBioem, partNano, partClinical].forEach(p => {
     p.style.opacity = partOpacity;
   });
 
-  assembledCore.setAttribute('opacity', Math.max(0, (progress - 0.7) / 0.3));
+  // Assembled core appears after 0.7
+  const coreProgress = Math.max(0, (progress - 0.7) / 0.3);
+  assembledCore.setAttribute('opacity', coreProgress);
 
-  if (progress < 0.05) assemblyLabel.textContent = 'SCROLL TO ASSEMBLE';
-  else if (progress < 0.7) assemblyLabel.textContent = `ASSEMBLING... ${Math.round(eased * 100)}%`;
-  else { assemblyLabel.textContent = 'VISION SHIELD COMPLETE'; assemblyLabel.style.color = 'var(--accent-electric)'; }
-
-  scrollTicking = false;
-}
-
-// Only process machine scroll when section is near viewport
-let machineInView = false;
-const machineObserver = new IntersectionObserver(e => { machineInView = e[0].isIntersecting; }, { rootMargin: '200px' });
-machineObserver.observe(machineSection);
-
-window.addEventListener('scroll', () => {
-  if (!machineInView) return;
-  if (!scrollTicking) {
-    requestAnimationFrame(handleMachineScroll);
-    scrollTicking = true;
+  if (progress < 0.05) {
+    assemblyLabel.textContent = 'SCROLL TO ASSEMBLE';
+  } else if (progress < 0.7) {
+    assemblyLabel.textContent = `ASSEMBLING... ${Math.round(eased * 100)}%`;
+  } else {
+    assemblyLabel.textContent = 'VISION SHIELD COMPLETE';
+    assemblyLabel.style.color = 'var(--accent-electric)';
   }
-}, { passive: true });
+});
 
-// ── LAZY VIDEO LOAD ──
-const videoSection = document.getElementById('video-section');
-const bgVideo = document.getElementById('bg-video');
-const videoObserver = new IntersectionObserver((entries) => {
-  if (entries[0].isIntersecting) {
-    // Load video sources only when section is about to enter viewport
-    bgVideo.querySelectorAll('source[data-src]').forEach(s => {
-      s.src = s.dataset.src;
-    });
-    bgVideo.load();
-    bgVideo.play().catch(() => {});
-    videoObserver.disconnect();
-  }
-}, { rootMargin: '400px' }); // start loading 400px before it appears
-videoObserver.observe(videoSection);
-
-// Init machine parts
+// Init parts with offset
 partEpi.setAttribute('transform', 'translate(0, -180)');
 partEpi.style.opacity = '0';
 partBioem.setAttribute('transform', 'translate(200, 0)');
@@ -2652,6 +3317,58 @@ partNano.setAttribute('transform', 'translate(0, 180)');
 partNano.style.opacity = '0';
 partClinical.setAttribute('transform', 'translate(-200, 0)');
 partClinical.style.opacity = '0';
+
+// ── HAMBURGER MENU ──
+const hamburger = document.getElementById('hamburger');
+const mobileNav = document.getElementById('mobile-nav');
+
+function openMenu() {
+  hamburger.classList.add('open');
+  mobileNav.classList.add('open');
+  hamburger.setAttribute('aria-expanded', 'true');
+  document.body.style.overflow = 'hidden';
+}
+function closeMenu() {
+  hamburger.classList.remove('open');
+  mobileNav.classList.remove('open');
+  hamburger.setAttribute('aria-expanded', 'false');
+  document.body.style.overflow = '';
+}
+hamburger.addEventListener('click', () => {
+  hamburger.classList.contains('open') ? closeMenu() : openMenu();
+});
+// Close on link click
+document.querySelectorAll('.mobile-nav a, .mobile-nav-link').forEach(link => {
+  link.addEventListener('click', closeMenu);
+});
+// Close on Escape
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+
+// ── MACHINE: disable scroll-assembly on mobile ──
+function isMobile() { return window.innerWidth <= 768; }
+
+// On mobile make all machine parts visible and in place immediately
+function initMachineParts() {
+  if (isMobile()) {
+    [partEpi, partBioem, partNano, partClinical].forEach(p => {
+      p.setAttribute('transform', 'translate(0,0)');
+      p.style.opacity = '1';
+    });
+    assembledCore.setAttribute('opacity', '1');
+    if (assemblyLabel) assemblyLabel.textContent = 'VISION SHIELD';
+  } else {
+    partEpi.setAttribute('transform', 'translate(0, -180)');
+    partEpi.style.opacity = '0';
+    partBioem.setAttribute('transform', 'translate(200, 0)');
+    partBioem.style.opacity = '0';
+    partNano.setAttribute('transform', 'translate(0, 180)');
+    partNano.style.opacity = '0';
+    partClinical.setAttribute('transform', 'translate(-200, 0)');
+    partClinical.style.opacity = '0';
+  }
+}
+initMachineParts();
+window.addEventListener('resize', initMachineParts, { passive: true });
 </script>
 </body>
 </html>
